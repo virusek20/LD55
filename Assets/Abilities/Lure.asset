@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72d57361ee0266b4e81fcc2f53b6a946, type: 3}
-  m_Name: Debug
+  m_Name: Lure
   m_EditorClassIdentifier: 
-  Name: Blow up wall
-  CastString: fbiopenup
-  Cooldown: 10
-  SpawnPrefab: {fileID: 692032605922172631, guid: 559dbdf20cc80ce41bf89ad3a675e593,
-    type: 3}
+  Name: 
+  CastString: 
+  Cooldown: 0
+  SpawnPrefab: {fileID: 0}

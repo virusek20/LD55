@@ -6,7 +6,8 @@ public enum AIState
 {
     Patrolling,
     Chasing,
-    Searching
+    Searching,
+    Spooked
 }
 
 public class AIAgent : MonoBehaviour
@@ -24,12 +25,14 @@ public class AIAgent : MonoBehaviour
     private AIState currentState = AIState.Patrolling;
     private Vector3 lastKnownPlayerPosition;
     private float searchTimer = 0f;
+    private float spookTimer = 0f;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         SetDestination();
     }
+
 
     void Update()
     {
@@ -44,7 +47,15 @@ public class AIAgent : MonoBehaviour
             case AIState.Searching:
                 SearchingUpdate();
                 break;
+            case AIState.Spooked:
+                SpookedUpdate();
+                break;
         }
+    }
+
+    public void SetState(AIState state)
+    {
+        currentState = state;
     }
 
     void PatrollingUpdate()
@@ -80,6 +91,21 @@ public class AIAgent : MonoBehaviour
         {
             currentState = AIState.Patrolling;
             SetDestination();
+        }
+    }
+
+    void SpookedUpdate()
+    {
+        spookTimer += Time.deltaTime;
+
+        if (spookTimer >= 1.0)
+        {
+            spookTimer = 0f;
+            var sphere = Random.insideUnitSphere * 5f;
+            sphere.y = 0;
+
+            var randomPosition = transform.position + sphere;
+            agent.SetDestination(randomPosition);
         }
     }
 
