@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72d57361ee0266b4e81fcc2f53b6a946, type: 3}
-  m_Name: Debug
+  m_Script: {fileID: 11500000, guid: 90a47b5a64c93df449f8c10a74c5ad47, type: 3}
+  m_Name: ClickBox
   m_EditorClassIdentifier: 
-  Name: Blow up wall
-  CastString: fbiopenup
-  Cooldown: 10
-  SpawnPrefab: {fileID: 692032605922172631, guid: 559dbdf20cc80ce41bf89ad3a675e593,
-    type: 3}
+  Id: clickbox
+  Name: Click a red box
+  Description: Clicked
+  Icon: {fileID: 21300000, guid: 69c550193dc0c7e44896b7bfade3bd35, type: 3}
+  CanFail: 0
+  IsRequired: 1
+  RequiredCounters: 10

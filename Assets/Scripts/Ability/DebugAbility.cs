@@ -4,7 +4,7 @@ public class DebugAbility : MonoBehaviour
 {
     void Start()
     {
-        print("Debug");
-        Destroy(gameObject);
+        var go = GameObject.Find("Cube (1)");
+        Destroy(go);
     }
 }
