@@ -13,6 +13,7 @@ public class AIAgent : MonoBehaviour
 {
     public List<Transform> PatrolPoints;
     public PlayerMovementController player;
+    public Transform playerTransform;
     public float visionAngle = 45f;
     public float visionDistance = 10f;
     public float searchDuration = 3f;
@@ -56,13 +57,13 @@ public class AIAgent : MonoBehaviour
         if (CanSeePlayer())
         {
             currentState = AIState.Chasing;
-            lastKnownPlayerPosition = player.transform.position;
+            lastKnownPlayerPosition = playerTransform.position;
         }
     }
 
     void ChasingUpdate()
     {
-        agent.SetDestination(player.transform.position);
+        agent.SetDestination(playerTransform.position);
 
         if (!CanSeePlayer())
         {
@@ -115,7 +116,7 @@ public class AIAgent : MonoBehaviour
     {
         if (player.IsInvisible) return false;
 
-        Vector3 directionToPlayer = player.transform.position - transform.position;
+        Vector3 directionToPlayer = playerTransform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         if (angle < visionAngle / 2f)
         {
@@ -124,7 +125,7 @@ public class AIAgent : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(transform.position, directionToPlayer, out hit))
                 {
-                    if (hit.transform == player)
+                    if (hit.transform == playerTransform)
                     {
                         return true;
                     }
