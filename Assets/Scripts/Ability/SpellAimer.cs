@@ -7,6 +7,7 @@ public class SpellAimer : MonoBehaviour
     public UnityEvent<RaycastHit> OnCast;
     public GameObject MarkerPrefab;
     public LayerMask TargetMask;
+    public bool NeedsLineOfSight;
 
     private GameObject Marker;
 
@@ -28,6 +29,14 @@ public class SpellAimer : MonoBehaviour
 
         if (!Input.GetMouseButtonDown(0)) return;
 
+        if (!NeedsLineOfSight)
+        {
+            OnCast.Invoke(hit);
+            MovementController.DisableMovement = false;
+            Destroy(Marker);
+            Destroy(this);
+        }
+
         ray = new Ray(transform.position, hit.point - transform.position);
         if (!Physics.Raycast(ray, out hit, TargetMask)) return;
 
@@ -35,5 +44,8 @@ public class SpellAimer : MonoBehaviour
         target.y = 1f;
         OnCast.Invoke(hit);
         MovementController.DisableMovement = false;
+
+        Destroy(Marker);
+        Destroy(this);
     }
 }
