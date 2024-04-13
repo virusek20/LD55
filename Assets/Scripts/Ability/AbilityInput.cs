@@ -52,7 +52,8 @@ public class AbilityInput : MonoBehaviour
     private void ProcessCast()
     {
         // Filter out backspace
-        if (Input.inputString.Contains('\b')) return;
+        // TODO: Maybe less hacky?
+        if (string.IsNullOrWhiteSpace(Input.inputString) || Input.inputString == "\b") return;
 
         CurrentCast += Input.inputString;
 
