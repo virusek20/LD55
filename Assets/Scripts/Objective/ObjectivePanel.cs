@@ -16,12 +16,16 @@ public class ObjectivePanel : MonoBehaviour
     {
         Icon.sprite = Objective.Objective.Icon;
         Title.text = Objective.Objective.Name;
+        Description.text = Objective.Objective.Description;
     }
 
     void Update()
     {
-        // TODO: Big string generation
-        Description.text = $"{Objective.Objective.Description} [{Objective.Counter}/{Objective.Objective.RequiredCounters}]";
+        if (Objective.Objective.RequiredCounters > 1)
+        {
+            // TODO: Big string generation
+            Description.text = $"{Objective.Objective.Description} [{Objective.Counter}/{Objective.Objective.RequiredCounters}]";
+        }
 
         Color color;
         if (Objective.IsCompleted) color = Color.green;
