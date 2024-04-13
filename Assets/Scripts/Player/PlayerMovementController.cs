@@ -24,7 +24,10 @@ public class PlayerMovementController : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit))
+        int layerMask = 1 << LayerMask.NameToLayer("UI");
+        layerMask = ~layerMask;
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
         {
             if (hit.collider.CompareTag("Ground"))
             {
