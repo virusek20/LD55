@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72d57361ee0266b4e81fcc2f53b6a946, type: 3}
-  m_Name: Lure
+  m_Name: RemoteInteract
   m_EditorClassIdentifier: 
-  Name: Lure
-  CastString: getoverhere
-  Cooldown: 30
-  SpawnPrefab: {fileID: 5791545885444653907, guid: 24b00159e93a6bd4ca662b4568993f0c,
+  Name: Telekinesis
+  CastString: reach
+  Cooldown: 15
+  SpawnPrefab: {fileID: 2355976302953567209, guid: f78518e3d56650c4da087017e3204700,
     type: 3}
