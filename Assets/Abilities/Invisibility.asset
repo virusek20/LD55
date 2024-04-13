@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72d57361ee0266b4e81fcc2f53b6a946, type: 3}
+  m_Name: Invisibility
+  m_EditorClassIdentifier: 
+  Name: Invisibility
+  CastString: vanish
+  Cooldown: 30
+  SpawnPrefab: {fileID: 2519817195750669841, guid: f6086b7a96489d6409167e55e48395f3,
+    type: 3}
