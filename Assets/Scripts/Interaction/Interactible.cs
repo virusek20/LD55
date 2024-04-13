@@ -7,6 +7,8 @@ public class Interactible : MonoBehaviour
     public UnityEvent OnMouseEnter;
     public UnityEvent OnMouseExit;
 
+    public bool CanRemoteInteract = true;
+
     void Start()
     {
         if (!TryGetComponent<Outline>(out var outline)) return;

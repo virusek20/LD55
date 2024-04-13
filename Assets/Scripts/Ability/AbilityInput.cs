@@ -12,6 +12,7 @@ public class AbilityInput : MonoBehaviour
 {
     public bool CastMode { get; private set; }
     public string CurrentCast { get; private set; }
+    public int MaxLength = 14;
 
     public List<AbilityScriptableObject> Abilities = new();
     public List<AbilityState> States = new();
@@ -56,6 +57,12 @@ public class AbilityInput : MonoBehaviour
         if (string.IsNullOrWhiteSpace(Input.inputString) || Input.inputString == "\b") return;
 
         CurrentCast += Input.inputString;
+        if (CurrentCast.Length > MaxLength)
+        {
+            OnFailedCast.Invoke();
+            ToggleCast(true);
+            return;
+        }
 
         foreach (var state in States)
         {

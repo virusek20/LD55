@@ -195,6 +195,7 @@ MonoBehaviour:
   visionAngle: 45
   visionDistance: 10
   searchDuration: 3
+  lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
 --- !u!136 &145258398
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1088,6 +1089,7 @@ MonoBehaviour:
   OnMouseExit:
     m_PersistentCalls:
       m_Calls: []
+  CanRemoteInteract: 1
 --- !u!114 &439807412
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1505,7 +1507,6 @@ GameObject:
   - component: {fileID: 814129278}
   - component: {fileID: 814129277}
   - component: {fileID: 814129276}
-  - component: {fileID: 814129275}
   m_Layer: 5
   m_Name: Cooldowns
   m_TagString: Untagged
@@ -1532,36 +1533,6 @@ RectTransform:
   m_AnchoredPosition: {x: -110, y: -160}
   m_SizeDelta: {x: 200, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &814129275
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814129273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &814129276
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1603,9 +1574,9 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 5
   m_ChildForceExpandWidth: 1
-  m_ChildForceExpandHeight: 1
+  m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
@@ -1747,10 +1718,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed8f6163f5ce4b41a69cf72501fd41e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxLength: 14
   Abilities:
   - {fileID: 11400000, guid: 8a9957491a9ecb44289a55fa4542abd3, type: 2}
   - {fileID: 11400000, guid: b3eba3f5bd2edd045b22212ebb42f60b, type: 2}
   - {fileID: 11400000, guid: fb35db56112883644a381a9d3322230b, type: 2}
+  - {fileID: 11400000, guid: 2c35ac7d295d603468648171c958d0e3, type: 2}
+  - {fileID: 11400000, guid: 8b99ab1c6f29df84bb023f9dc19333fd, type: 2}
   OnSuccessfulCast:
     m_PersistentCalls:
       m_Calls: []
@@ -1934,8 +1908,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Current spell
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2006b1f24f55603419fc4f6458e160c8, type: 2}
+  m_sharedMaterial: {fileID: 1884013894967296951, guid: 2006b1f24f55603419fc4f6458e160c8,
+    type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1959,17 +1934,17 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0

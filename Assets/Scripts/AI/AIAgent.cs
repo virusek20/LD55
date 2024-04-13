@@ -23,7 +23,7 @@ public class AIAgent : MonoBehaviour
     private int currentPatrolIndex = 0;
     private bool movingForward = true;
     private AIState currentState = AIState.Patrolling;
-    private Vector3 lastKnownPlayerPosition;
+    public Vector3 lastKnownPlayerPosition;
     private float searchTimer = 0f;
     private float searchLookTimer = 0f;
     private float spookTimer = 0f;
