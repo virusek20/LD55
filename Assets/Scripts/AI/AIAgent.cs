@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,7 +12,7 @@ public enum AIState
 public class AIAgent : MonoBehaviour
 {
     public List<Transform> PatrolPoints;
-    public Transform player;
+    public PlayerMovementController player;
     public float visionAngle = 45f;
     public float visionDistance = 10f;
     public float searchDuration = 3f;
@@ -57,13 +56,13 @@ public class AIAgent : MonoBehaviour
         if (CanSeePlayer())
         {
             currentState = AIState.Chasing;
-            lastKnownPlayerPosition = player.position;
+            lastKnownPlayerPosition = player.transform.position;
         }
     }
 
     void ChasingUpdate()
     {
-        agent.SetDestination(player.position);
+        agent.SetDestination(player.transform.position);
 
         if (!CanSeePlayer())
         {
@@ -114,7 +113,9 @@ public class AIAgent : MonoBehaviour
 
     bool CanSeePlayer()
     {
-        Vector3 directionToPlayer = player.position - transform.position;
+        if (player.IsInvisible) return false;
+
+        Vector3 directionToPlayer = player.transform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
         if (angle < visionAngle / 2f)
         {
