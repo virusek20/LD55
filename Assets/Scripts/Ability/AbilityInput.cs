@@ -16,7 +16,7 @@ public class AbilityInput : MonoBehaviour
     public List<AbilityScriptableObject> Abilities = new();
     public List<AbilityState> States = new();
 
-    public UnityEvent OnSuccessfulCast;
+    public UnityEvent<AbilityScriptableObject> OnSuccessfulCast;
     public UnityEvent OnFailedCast;
 
     private void Awake()
@@ -70,7 +70,7 @@ public class AbilityInput : MonoBehaviour
                 Instantiate(state.Ability.SpawnPrefab, transform.position, transform.rotation);
                 state.RemainingCooldown = state.Ability.Cooldown;
 
-                OnSuccessfulCast.Invoke();
+                OnSuccessfulCast.Invoke(state.Ability);
                 ToggleCast(false);
             }
         }
