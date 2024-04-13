@@ -8,15 +8,35 @@ public class Interactor : MonoBehaviour
     private RaycastHit _hit;
     private Ray _ray;
 
+    private Interactible _lastInteractible;
+
     void Update()
     {
-        if (!Input.GetMouseButtonDown(0)) return;
-        
         // Camera -> Object
         _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (!Physics.Raycast(_ray, out _hit)) return;
+        if (!Physics.Raycast(_ray, out _hit))
+        {
+            if (_lastInteractible != null) _lastInteractible.OnMouseExit.Invoke();
+            _lastInteractible = null;
+            return;
+        }
 
-        if (!_hit.transform.TryGetComponent<Interactible>(out var interactible)) return;
+        if (!_hit.transform.TryGetComponent<Interactible>(out var interactible))
+        {
+            if (_lastInteractible != null) _lastInteractible.OnMouseExit.Invoke();
+            _lastInteractible = null;
+            return;
+        }
+
+        if (_lastInteractible != interactible)
+        {
+            if (_lastInteractible != null) _lastInteractible.OnMouseExit.Invoke();
+            interactible.OnMouseEnter.Invoke();
+
+            _lastInteractible = interactible;
+        }
+
+        if (!Input.GetMouseButtonDown(0)) return;
 
         // Player -> Object
         _ray = new Ray(transform.position, _hit.transform.position - transform.position);

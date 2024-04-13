@@ -18,4 +18,4 @@ MonoBehaviour:
   Icon: {fileID: 21300000, guid: 69c550193dc0c7e44896b7bfade3bd35, type: 3}
   CanFail: 0
   IsRequired: 1
-  RequiredCounters: 10
+  RequiredCounters: 1
