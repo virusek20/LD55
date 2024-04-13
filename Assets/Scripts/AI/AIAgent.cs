@@ -25,6 +25,7 @@ public class AIAgent : MonoBehaviour
     private AIState currentState = AIState.Patrolling;
     private Vector3 lastKnownPlayerPosition;
     private float searchTimer = 0f;
+    private float searchLookTimer = 0f;
     private float spookTimer = 0f;
 
     void Start()
@@ -86,11 +87,22 @@ public class AIAgent : MonoBehaviour
     void SearchingUpdate()
     {
         searchTimer += Time.deltaTime;
+        searchLookTimer += Time.deltaTime;
 
         if (searchTimer >= searchDuration)
         {
             currentState = AIState.Patrolling;
             SetDestination();
+        }
+
+        if (searchLookTimer >= 1.0)
+        {
+            searchLookTimer = 0f;
+            var sphere = Random.insideUnitSphere * 5f;
+            sphere.y = 0;
+
+            var randomPosition = transform.position + sphere;
+            agent.SetDestination(randomPosition);
         }
     }
 
