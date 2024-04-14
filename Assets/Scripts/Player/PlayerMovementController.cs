@@ -14,6 +14,8 @@ public class PlayerMovementController : MonoBehaviour
     public Color VisibleColor;
     public Color InvisibleColor;
 
+    public GameObject MovementCrosshairPrefab;
+
     public Camera cam;
 
     void Start()
@@ -44,8 +46,14 @@ public class PlayerMovementController : MonoBehaviour
         {
             if (hit.collider.CompareTag("Ground"))
             {
+                SpawnCrosshair(hit.point);
                 agent.SetDestination(hit.point);
             }
         }
+    }
+
+    void SpawnCrosshair(Vector3 position)
+    {
+        GameObject crosshair = Instantiate(MovementCrosshairPrefab, position + new Vector3(0, 0.1f, 0), MovementCrosshairPrefab.transform.localRotation);
     }
 }
