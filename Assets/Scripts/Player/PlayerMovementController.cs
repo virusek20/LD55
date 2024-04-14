@@ -17,11 +17,14 @@ public class PlayerMovementController : MonoBehaviour
     public GameObject MovementCrosshairPrefab;
 
     public Camera cam;
+    public AudioSource audioSource;
+    public AudioClip movementSound;
 
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         _playerMaterial = _renderer.material;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -47,6 +50,8 @@ public class PlayerMovementController : MonoBehaviour
             if (hit.collider.CompareTag("Ground"))
             {
                 SpawnCrosshair(hit.point);
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.PlayOneShot(movementSound);
                 agent.SetDestination(hit.point);
             }
         }
