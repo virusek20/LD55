@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90a47b5a64c93df449f8c10a74c5ad47, type: 3}
-  m_Name: ClickBox
+  m_Name: Main
   m_EditorClassIdentifier: 
-  Id: clickbox
-  Name: Click a red box
-  Description: Clicked
-  Icon: {fileID: 21300000, guid: 69c550193dc0c7e44896b7bfade3bd35, type: 3}
+  Id: main
+  Name: Steal ancient summoning tome
+  Description: 
+  Icon: {fileID: 0}
   CanFail: 0
   IsRequired: 1
   RequiredCounters: 1
