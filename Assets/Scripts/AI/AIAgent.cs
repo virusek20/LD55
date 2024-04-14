@@ -104,6 +104,7 @@ public class AIAgent : MonoBehaviour
                 if (Vector3.Distance(door.transform.position, lastKnownPlayerPosition) < 5f)
                 {
                     if (doorScript.doorOpen) continue;
+                    if (doorScript.Locked) continue;
                     doorScript.ToggleDoor();
                 }
             }
