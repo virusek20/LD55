@@ -65,6 +65,16 @@ public class ObjectiveManager : MonoBehaviour
         CheckMissionCompletion();
     }
 
+    public bool CanLeave()
+    {
+        foreach (var state in States)
+        {
+            if (state.Objective.IsRequired && !state.IsCompleted) return false;
+        }
+
+        return true;
+    }
+
     private void CheckMissionCompletion()
     {
         var isMissing = States.Any(s => !s.IsCompleted);
