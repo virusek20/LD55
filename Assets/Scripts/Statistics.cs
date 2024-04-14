@@ -15,8 +15,6 @@ public class Statistics : MonoBehaviour
 
     public void ShowStats()
     {
-        Time.timeScale = 0f;
-
         StatisticsText.text = $"Time: {Mathf.Floor(Time.timeSinceLevelLoad / 60)}m {Mathf.Ceil(Time.timeSinceLevelLoad) % 60}s\n" +
             $"Objectives:\n" +
             $"\tCompleted: {Objective.States.Count(s => s.IsCompleted)}/{Objective.States.Count(s => !s.Objective.CanFail)}\n" +

@@ -18,6 +18,9 @@ public class CameraFollow : MonoBehaviour
     {
         if (playerTransform != null)
         {
+            // End game / pause
+            if (Time.deltaTime == 0f) return;
+
             Vector3 playerVelocity = (playerTransform.position - lastPlayerPosition) / Time.deltaTime;
             lastPlayerPosition = playerTransform.position;
 
