@@ -20,6 +20,8 @@ public class PlayerMovementController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip movementSound;
 
+    public Animator anim;
+
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -34,6 +36,15 @@ public class PlayerMovementController : MonoBehaviour
         if (!DisableMovement && Input.GetMouseButtonDown(0))
         {
             MoveToClickedPoint();
+        }
+
+        if (IsMoving())
+        {
+            anim.Play("MoveSneak");
+        }
+        else
+        {
+            anim.Play("Idle1");
         }
     }
 
@@ -60,5 +71,10 @@ public class PlayerMovementController : MonoBehaviour
     void SpawnCrosshair(Vector3 position)
     {
         GameObject crosshair = Instantiate(MovementCrosshairPrefab, position + new Vector3(0, 0.1f, 0), MovementCrosshairPrefab.transform.localRotation);
+    }
+
+    public bool IsMoving()
+    {
+        return agent.velocity.magnitude > 1f;
     }
 }

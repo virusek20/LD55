@@ -27,6 +27,10 @@ public class AIAgent : MonoBehaviour
     private float searchTimer = 0f;
     private float searchLookTimer = 0f;
     private float spookTimer = 0f;
+    private float lockOnTimer = 0f;
+    public float LockOnDuration = 3.0f;
+
+    public Animator anim;
 
     void Start()
     {
@@ -40,9 +44,11 @@ public class AIAgent : MonoBehaviour
         switch (currentState)
         {
             case AIState.Patrolling:
+                anim.Play("MovePatrol");
                 PatrollingUpdate();
                 break;
             case AIState.Chasing:
+                anim.Play("MoveSuspicious");
                 ChasingUpdate();
                 break;
             case AIState.Searching:
@@ -77,10 +83,15 @@ public class AIAgent : MonoBehaviour
     {
         agent.SetDestination(playerTransform.position);
 
-        if (!CanSeePlayer())
+        lockOnTimer += Time.deltaTime;
+        if (lockOnTimer >= LockOnDuration)
         {
-            currentState = AIState.Searching;
-            searchTimer = 0f;
+            if (!CanSeePlayer())
+            {
+                currentState = AIState.Searching;
+                searchTimer = 0f;
+            }
+            lockOnTimer = 0f;
         }
     }
 
@@ -168,12 +179,16 @@ public class AIAgent : MonoBehaviour
 
         Vector3 directionToPlayer = playerTransform.position - transform.position;
         float angle = Vector3.Angle(transform.forward, directionToPlayer);
-        if (angle < visionAngle / 2f)
+
+        if (angle < visionAngle / 2f && directionToPlayer.magnitude < visionDistance)
         {
-            if (directionToPlayer.magnitude < visionDistance)
+            float dotProduct = Vector3.Dot(transform.forward, directionToPlayer.normalized);
+            float maxDotProduct = Mathf.Cos(Mathf.Deg2Rad * (visionAngle / 2f));
+
+            if (dotProduct >= maxDotProduct)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(transform.position, directionToPlayer, out hit))
+                if (Physics.Raycast(transform.position, directionToPlayer, out hit, visionDistance))
                 {
                     if (hit.transform == playerTransform)
                     {
@@ -184,4 +199,5 @@ public class AIAgent : MonoBehaviour
         }
         return false;
     }
+
 }
