@@ -97,6 +97,17 @@ public class AIAgent : MonoBehaviour
 
         if (searchLookTimer >= 1.0)
         {
+            var doors = GameObject.FindGameObjectsWithTag("Door");
+            foreach (var door in doors)
+            {
+                var doorScript = door.GetComponent<Door>();
+                if (Vector3.Distance(door.transform.position, lastKnownPlayerPosition) < 5f)
+                {
+                    if (doorScript.doorOpen) continue;
+                    doorScript.ToggleDoor();
+                }
+            }
+
             searchLookTimer = 0f;
             var sphere = Random.insideUnitSphere * 5f;
             sphere.y = 0;

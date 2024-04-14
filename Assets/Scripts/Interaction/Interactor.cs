@@ -10,10 +10,12 @@ public class Interactor : MonoBehaviour
 
     private Interactible _lastInteractible;
 
+    public Camera cam;
+
     void Update()
     {
         // Camera -> Object
-        _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        _ray = cam.ScreenPointToRay(Input.mousePosition);
         if (!Physics.Raycast(_ray, out _hit))
         {
             if (_lastInteractible != null) _lastInteractible.OnMouseExit.Invoke();

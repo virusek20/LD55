@@ -387,7 +387,7 @@ namespace FischlWorks_FogWar
 
             fogPlaneTextureLerpBuffer.wrapMode = TextureWrapMode.Clamp;
 
-            fogPlaneTextureLerpBuffer.filterMode = FilterMode.Bilinear;
+            fogPlaneTextureLerpBuffer.filterMode = FilterMode.Trilinear;
 
             fogPlane.GetComponent<MeshRenderer>().material = new Material(fogPlaneMaterial);
 

@@ -14,6 +14,8 @@ public class PlayerMovementController : MonoBehaviour
     public Color VisibleColor;
     public Color InvisibleColor;
 
+    public Camera cam;
+
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
@@ -32,7 +34,7 @@ public class PlayerMovementController : MonoBehaviour
 
     void MoveToClickedPoint()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         int layerMask = 1 << LayerMask.NameToLayer("UI");
