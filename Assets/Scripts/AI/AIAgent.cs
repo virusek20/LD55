@@ -44,10 +44,12 @@ public class AIAgent : MonoBehaviour
         switch (currentState)
         {
             case AIState.Patrolling:
+                agent.speed = 1.7f;
                 anim.Play("MovePatrol");
                 PatrollingUpdate();
                 break;
             case AIState.Chasing:
+                agent.speed = 4.5f;
                 anim.Play("MoveSuspicious");
                 ChasingUpdate();
                 break;

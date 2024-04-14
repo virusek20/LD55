@@ -85,8 +85,8 @@ MonoBehaviour:
   - {fileID: 0}
   player: {fileID: 0}
   playerTransform: {fileID: 0}
-  visionAngle: 70
-  visionDistance: 6
+  visionAngle: 180
+  visionDistance: 5
   searchDuration: 3
   lastKnownPlayerPosition: {x: 0, y: 0, z: 0}
   LockOnDuration: 5
@@ -101,7 +101,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 1.7
   m_Acceleration: 20
   avoidancePriority: 50
   m_AngularSpeed: 1000
