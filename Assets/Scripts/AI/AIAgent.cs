@@ -38,7 +38,6 @@ public class AIAgent : MonoBehaviour
         SetDestination();
     }
 
-
     void Update()
     {
         switch (currentState)
@@ -84,6 +83,11 @@ public class AIAgent : MonoBehaviour
     void ChasingUpdate()
     {
         agent.SetDestination(playerTransform.position);
+
+        if (Vector3.Distance(transform.position, playerTransform.position) < 1.5f)
+        {
+            player.Die();
+        }
 
         lockOnTimer += Time.deltaTime;
         if (lockOnTimer >= LockOnDuration)

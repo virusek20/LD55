@@ -16,21 +16,40 @@ public class PlayerMovementController : MonoBehaviour
 
     public GameObject MovementCrosshairPrefab;
 
+    public LoseCameraController loseCam;
     public Camera cam;
     public AudioSource audioSource;
     public AudioClip movementSound;
 
     public Animator anim;
+    public bool IsDead = false;
 
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         _playerMaterial = _renderer.material;
         audioSource = GetComponent<AudioSource>();
+
+        loseCam = FindObjectOfType<LoseCameraController>();
+    }
+
+    public void Die()
+    {
+        if (IsDead) return;
+
+        IsDead = true;
+        agent.isStopped = true;
+        agent.speed = 0;
+        agent.velocity = Vector3.zero;
+        agent.acceleration = 0;
+        anim.Play("Caught");
+
+        loseCam.StartCoroutine(loseCam.LoseAnimation());
     }
 
     void Update()
     {
+        if (IsDead) return;
         _playerMaterial.color = IsInvisible ? InvisibleColor : VisibleColor;
 
         if (!DisableMovement && Input.GetMouseButtonDown(0))
