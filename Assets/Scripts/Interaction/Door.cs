@@ -22,6 +22,15 @@ public class Door : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        if (doorOpen)
+        {
+            transform.localRotation = Quaternion.Euler(TargetRotation);
+        }
+        else
+        {
+            transform.localRotation = Quaternion.Euler(Vector3.zero);
+        }
     }
 
     void Update()
