@@ -38,11 +38,21 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _Float: -0.05
+    - _Offset: -0.03
+    - _Power: 0.4
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Scale: 0.5
+    - _SwayPower: 1
+    - _SwaySidewaysSpeed: 6
+    - _SwaySidewaysStrength: 0.2
+    - _SwaySidewaysStrength_1: 1
     - _SwaySpeed: 5
     - _SwayStrength: 0.1
-    m_Colors: []
+    - _alpha: 1
+    m_Colors:
+    - _Color: {r: 0.36320752, g: 0.48902747, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2662553546285266563
 MonoBehaviour:
