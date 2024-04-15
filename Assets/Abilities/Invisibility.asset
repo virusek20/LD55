@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Invisibility
   m_EditorClassIdentifier: 
   Name: Invisibility
-  CastString: vanish
+  CastString: tabascetdemundo
   Cooldown: 30
   SpawnPrefab: {fileID: 2519817195750669841, guid: f6086b7a96489d6409167e55e48395f3,
     type: 3}

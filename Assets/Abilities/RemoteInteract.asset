@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RemoteInteract
   m_EditorClassIdentifier: 
   Name: Telekinesis
-  CastString: reach
+  CastString: proculopus
   Cooldown: 15
   SpawnPrefab: {fileID: 2355976302953567209, guid: f78518e3d56650c4da087017e3204700,
     type: 3}
