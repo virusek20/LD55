@@ -16,6 +16,11 @@ public class ExitRoute : MonoBehaviour
         _objective = FindObjectOfType<ObjectiveManager>();
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player")) TryExit();
+    }
+
     public void TryExit()
     {
         if (!_objective.CanLeave())
