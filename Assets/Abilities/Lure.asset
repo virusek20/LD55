@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Lure
   m_EditorClassIdentifier: 
   Name: Lure
-  CastString: getoverhere
+  CastString: congregare
   Cooldown: 30
   SpawnPrefab: {fileID: 5791545885444653907, guid: 24b00159e93a6bd4ca662b4568993f0c,
     type: 3}

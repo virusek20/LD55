@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Spook
   m_EditorClassIdentifier: 
   Name: Spook
-  CastString: boo
+  CastString: fugeresalutem
   Cooldown: 30
   SpawnPrefab: {fileID: 7107084301460660763, guid: cce2583d4eb0f184aadda23655d0598a,
     type: 3}
