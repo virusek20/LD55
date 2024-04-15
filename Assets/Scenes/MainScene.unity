@@ -12200,7 +12200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 394688393}
-  offset: {x: 0, y: 8.48, z: -8.56}
+  offset: {x: 0, y: 7.48, z: -8.56}
   smoothSpeed: 0.8
   velocityOffsetFactor: 0.05
 --- !u!114 &330585549
@@ -34083,7 +34083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 394688393}
-  offset: {x: 0, y: 9.48, z: -8.56}
+  offset: {x: 0, y: 7.48, z: -8.56}
   smoothSpeed: 0.8
   velocityOffsetFactor: 0.05
 --- !u!1 &1014184708
@@ -47541,6 +47541,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6700671782588079644, guid: 998a10149d566b04da5b1a6946fc97bc,
+        type: 3}
+      propertyPath: OpenBackwards
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9075818978527815675, guid: 998a10149d566b04da5b1a6946fc97bc,
         type: 3}
       propertyPath: m_Name
@@ -52908,7 +52913,7 @@ MonoBehaviour:
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_UseGeometry: 0
+  m_UseGeometry: 1
   m_DefaultArea: 0
   m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
@@ -52916,7 +52921,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 969a21e14404b4344bcb7456ea81b7e8, type: 2}
   m_BuildHeightMesh: 0
@@ -71185,8 +71190,8 @@ MonoBehaviour:
   LevelDataToLoad: {fileID: 0}
   saveDataOnScan: 0
   levelNameToSave: Default
-  levelDimensionX: 200
-  levelDimensionY: 200
+  levelDimensionX: 100
+  levelDimensionY: 100
   unitScale: 1
   scanSpacingPerUnit: 0.25
   rayStartHeight: 3
@@ -71206,7 +71211,7 @@ Transform:
   m_GameObject: {fileID: 2126190095}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -46.5, y: 0, z: 12.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

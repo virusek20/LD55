@@ -7,6 +7,7 @@ public class Door : MonoBehaviour
     public float RotationSpeed = 1.0f;
     public bool doorOpen = false; // Start with the door closed
     public bool Locked = false;
+    public bool OpenBackwards = false;
 
     private Coroutine currentCoroutine;
 
@@ -62,7 +63,12 @@ public class Door : MonoBehaviour
     IEnumerator OpenDoorCoroutine()
     {
         Quaternion startRotation = transform.localRotation;
-        Quaternion targetRotation = Quaternion.Euler(TargetRotation);
+        Quaternion targetRotation;
+        if (OpenBackwards)
+            targetRotation = Quaternion.Euler(-TargetRotation);
+        else
+            targetRotation = Quaternion.Euler(TargetRotation);
+
         float progress = 0f;
         while (progress < 1f)
         {
@@ -76,6 +82,9 @@ public class Door : MonoBehaviour
     {
         Quaternion startRotation = transform.localRotation;
         Quaternion targetRotation = Quaternion.Euler(Vector3.zero);
+        if (OpenBackwards)
+            targetRotation = Quaternion.Euler(-Vector3.zero);
+
         float progress = 0f;
         while (progress < 1f)
         {
@@ -88,12 +97,12 @@ public class Door : MonoBehaviour
     public void ShowLockIcon()
     {
         if (Locked)
-        LockIcon.SetActive(true);
+            LockIcon.SetActive(true);
     }
 
     public void HideLockIcon()
     {
         if (Locked)
-        LockIcon.SetActive(false);
+            LockIcon.SetActive(false);
     }
 }

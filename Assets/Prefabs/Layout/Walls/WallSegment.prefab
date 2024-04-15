@@ -2520,8 +2520,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 3.09, z: 0.38}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2, y: 2.47, z: 0.38}
+  m_Center: {x: 0, y: 1.13, z: 0}
 --- !u!1 &6172371489653799185
 GameObject:
   m_ObjectHideFlags: 0
@@ -3054,6 +3054,7 @@ MonoBehaviour:
   RotationSpeed: 2
   doorOpen: 0
   Locked: 1
+  OpenBackwards: 0
   doorOpenSound: {fileID: 8300000, guid: 68a8a4934a8f5f14a9856fc079fb0a25, type: 3}
   doorCloseSound: {fileID: 8300000, guid: 9181ca582d6e06b40a75378bffb80f8b, type: 3}
   doorLockedSound: {fileID: 8300000, guid: d0d17fb5d7f4ec04c96bbbb44aadf1fa, type: 3}
@@ -3454,7 +3455,8 @@ MonoBehaviour:
   TargetRotation: {x: 0, y: -82.81, z: 0}
   RotationSpeed: 2
   doorOpen: 0
-  Locked: 1
+  Locked: 0
+  OpenBackwards: 0
   doorOpenSound: {fileID: 8300000, guid: 68a8a4934a8f5f14a9856fc079fb0a25, type: 3}
   doorCloseSound: {fileID: 8300000, guid: 9181ca582d6e06b40a75378bffb80f8b, type: 3}
   doorLockedSound: {fileID: 8300000, guid: d0d17fb5d7f4ec04c96bbbb44aadf1fa, type: 3}
