@@ -476,21 +476,23 @@ namespace FischlWorks_FogWar
         // Doing shader business on the script, if we pull this out as a shader pass, same operations must be repeated
         private void UpdateFogPlaneTextureBuffer()
         {
+            var buffer = fogPlaneTextureLerpBuffer.GetPixelData<byte>(0);
+            var target = fogPlaneTextureLerpTarget.GetPixelData<byte>(0);
+
             for (int xIterator = 0; xIterator < levelDimensionX; xIterator++)
             {
                 for (int yIterator = 0; yIterator < levelDimensionY; yIterator++)
                 {
-                    Color bufferPixel = fogPlaneTextureLerpBuffer.GetPixel(xIterator, yIterator);
-                    Color targetPixel = fogPlaneTextureLerpTarget.GetPixel(xIterator, yIterator);
-
-                    fogPlaneTextureLerpBuffer.SetPixel(xIterator, yIterator, Color.Lerp(
-                        bufferPixel,
-                        targetPixel,
-                        fogLerpSpeed * Time.deltaTime));
+                    var index = (yIterator * levelDimensionX + xIterator) * 4;
+                    buffer[index + 0] = (byte)Mathf.Lerp(buffer[index + 0], target[index + 0], fogLerpSpeed * Time.deltaTime);
+                    buffer[index + 1] = (byte)Mathf.Lerp(buffer[index + 1], target[index + 1], fogLerpSpeed * Time.deltaTime);
+                    buffer[index + 2] = (byte)Mathf.Lerp(buffer[index + 2], target[index + 2], fogLerpSpeed * Time.deltaTime);
+                    buffer[index + 3] = (byte)Mathf.Lerp(buffer[index + 3], target[index + 3], fogLerpSpeed * Time.deltaTime);
+                    
                 }
             }
 
-            fogPlaneTextureLerpBuffer.Apply();
+            fogPlaneTextureLerpBuffer.Apply(false);
         }
 
 

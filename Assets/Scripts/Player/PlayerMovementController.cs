@@ -3,13 +3,20 @@ using UnityEngine;
 public class PlayerMovementController : MonoBehaviour
 {
     public bool DisableMovement = false;
+
     public bool IsInvisible = false;
+    private bool _lastInvisible = false;
 
     private UnityEngine.AI.NavMeshAgent agent;
 
     [SerializeField]
-    private MeshRenderer _renderer;
+    private SkinnedMeshRenderer _renderer;
+
+    [SerializeField]
     private Material _playerMaterial;
+
+    [SerializeField]
+    private Material _ghostMaterial;
 
     public Color VisibleColor;
     public Color InvisibleColor;
@@ -27,9 +34,7 @@ public class PlayerMovementController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
-        _playerMaterial = _renderer.material;
         audioSource = GetComponent<AudioSource>();
-
         loseCam = FindObjectOfType<LoseCameraController>();
     }
 
@@ -50,7 +55,12 @@ public class PlayerMovementController : MonoBehaviour
     void Update()
     {
         if (IsDead) return;
-        _playerMaterial.color = IsInvisible ? InvisibleColor : VisibleColor;
+
+        if (_lastInvisible != IsInvisible)
+        {
+            _renderer.material = IsInvisible ? _ghostMaterial : _playerMaterial;
+            _lastInvisible = IsInvisible;
+        }
 
         if (!DisableMovement && Input.GetMouseButtonDown(0))
         {
