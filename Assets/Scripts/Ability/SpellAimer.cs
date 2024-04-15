@@ -37,6 +37,7 @@ public class SpellAimer : MonoBehaviour
             MovementController.DisableMovement = false;
             Destroy(Marker);
             Destroy(this);
+            return;
         }
 
         ray = new Ray(transform.position, hit.point - transform.position);
