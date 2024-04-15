@@ -85,7 +85,7 @@ public class PlayerMovementController : MonoBehaviour
         int layerMask = 1 << LayerMask.NameToLayer("UI");
         layerMask = ~layerMask;
 
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask, QueryTriggerInteraction.Ignore))
         {
             if (hit.collider.CompareTag("Ground"))
             {
