@@ -8,6 +8,7 @@ public class SpellAimer : MonoBehaviour
     public GameObject MarkerPrefab;
     public LayerMask TargetMask;
     public bool NeedsLineOfSight;
+    public GameObject GhostPrefab;
 
     private GameObject Marker;
 
@@ -32,6 +33,7 @@ public class SpellAimer : MonoBehaviour
         if (!NeedsLineOfSight)
         {
             OnCast.Invoke(hit);
+            if (GhostPrefab != null) Instantiate(GhostPrefab, hit.point, Quaternion.identity);
             MovementController.DisableMovement = false;
             Destroy(Marker);
             Destroy(this);
@@ -43,6 +45,7 @@ public class SpellAimer : MonoBehaviour
         target = hit.point;
         target.y = 1f;
         OnCast.Invoke(hit);
+        if (GhostPrefab != null) Instantiate(GhostPrefab, hit.point, Quaternion.identity);
         MovementController.DisableMovement = false;
 
         Destroy(Marker);

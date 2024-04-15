@@ -67,6 +67,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   NeedsLineOfSight: 0
+  GhostPrefab: {fileID: 5378418879762684665, guid: 64f03a923019c4c43af5d2bd0ff0452c,
+    type: 3}
 --- !u!114 &-8667674963394476809
 MonoBehaviour:
   m_ObjectHideFlags: 0
