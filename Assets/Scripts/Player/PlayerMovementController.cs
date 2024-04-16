@@ -1,3 +1,4 @@
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class PlayerMovementController : MonoBehaviour
@@ -28,6 +29,9 @@ public class PlayerMovementController : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip movementSound;
 
+    private AbilityInput _abilityInput;
+    private float _idleTime;
+
     public Animator anim;
     public bool IsDead = false;
 
@@ -36,6 +40,7 @@ public class PlayerMovementController : MonoBehaviour
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         audioSource = GetComponent<AudioSource>();
         loseCam = FindObjectOfType<LoseCameraController>();
+        _abilityInput = FindObjectOfType<AbilityInput>();
     }
 
     public void Die()
@@ -67,14 +72,11 @@ public class PlayerMovementController : MonoBehaviour
             MoveToClickedPoint();
         }
 
-        if (IsMoving())
-        {
-            anim.Play("MoveSneak");
-        }
-        else
-        {
-            anim.Play("Idle1");
-        }
+        _idleTime += Time.deltaTime;
+
+        anim.SetBool("IsCasting", _abilityInput.CastMode);
+        anim.SetFloat("Speed", agent.velocity.magnitude);
+        anim.SetFloat("IdleTime", _idleTime);
     }
 
     void MoveToClickedPoint()
@@ -93,9 +95,12 @@ public class PlayerMovementController : MonoBehaviour
                 audioSource.pitch = Random.Range(0.8f, 1.2f);
                 audioSource.PlayOneShot(movementSound);
                 agent.SetDestination(hit.point);
+
+                _idleTime = 0f;
             }
         }
     }
+
 
     void SpawnCrosshair(Vector3 position)
     {
@@ -105,5 +110,10 @@ public class PlayerMovementController : MonoBehaviour
     public bool IsMoving()
     {
         return agent.velocity.magnitude > 1f;
+    }
+                
+    public void SetDestination(Vector3 destination)
+    {
+        agent.SetDestination(destination);
     }
 }
