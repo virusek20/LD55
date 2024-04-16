@@ -7,7 +7,10 @@ public enum AIState
     Patrolling,
     Chasing,
     Searching,
-    Spooked
+    Spooked,
+    Lure,
+    LostPlayer,
+    Shoot
 }
 
 public class AIAgent : MonoBehaviour
@@ -32,9 +35,28 @@ public class AIAgent : MonoBehaviour
 
     public Animator anim;
 
+    public float RadioDelay = 30;
+    private float _radioDelayTimer = 0;
+    public AudioSource AudioSource;
+    public AudioClip Huh;
+    public AudioClip Radio;
+    public AudioClip MovementSound;
+
+    [SerializeField]
+    private float _lureIdleLength = 5f;
+    private float _lureDelay;
+
+    [SerializeField]
+    private float _lostDelayLength = 3.5f;
+    private float _lostDelay;
+
+    private float _stepDelay;
+
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        AudioSource = GetComponent<AudioSource>();
+
         SetDestination();
     }
 
@@ -44,30 +66,72 @@ public class AIAgent : MonoBehaviour
         {
             case AIState.Patrolling:
                 agent.speed = 1.7f;
-                anim.Play("MovePatrol");
                 PatrollingUpdate();
                 break;
             case AIState.Chasing:
                 agent.speed = 4.5f;
-                anim.Play("MoveSuspicious");
                 ChasingUpdate();
                 break;
             case AIState.Searching:
                 SearchingUpdate();
                 break;
+            case AIState.Lure:
+                LureUpdate();
+                break;
+            case AIState.LostPlayer:
+                LostPlayerUpdate();
+                break;
             case AIState.Spooked:
                 SpookedUpdate();
                 break;
+        }
+
+        anim.SetFloat("Velocity", agent.velocity.magnitude);
+        anim.SetBool("Spook", currentState == AIState.Spooked);
+        anim.SetBool("SeesPlayer", currentState == AIState.Chasing);
+        anim.SetBool("HasTarget", currentState == AIState.Searching || currentState == AIState.Chasing || currentState == AIState.Lure);
+
+        if (agent.velocity.magnitude > 0.5f && _stepDelay < 0f)
+        {
+            AudioSource.pitch = Random.Range(0.8f, 1.2f);
+            AudioSource.PlayOneShot(MovementSound);
+            _stepDelay = 1.5f;
+        }
+        else
+        {
+            _stepDelay -= Time.deltaTime * agent.velocity.magnitude;
         }
     }
 
     public void SetState(AIState state)
     {
         currentState = state;
+
+        if (state == AIState.Spooked)
+        {
+            spookTimer = 0f;
+            anim.SetTrigger("CanSpook");
+        }
+
+        anim.ResetTrigger("CanSpook");
+    }
+
+    public void Lure(Vector3 target)
+    {
+        currentState = AIState.Lure;
+        AudioSource.PlayOneShot(Huh);
+        agent.SetDestination(target);
     }
 
     void PatrollingUpdate()
     {
+        if (Random.value > 0.999f && _radioDelayTimer <= 0f)
+        {
+            AudioSource.PlayOneShot(Radio);
+            _radioDelayTimer = RadioDelay;
+        }
+        else _radioDelayTimer -= Time.deltaTime;
+
         if (!agent.pathPending && agent.remainingDistance < 0.1f)
         {
             MoveToNextPatrolPoint();
@@ -76,6 +140,7 @@ public class AIAgent : MonoBehaviour
         if (CanSeePlayer())
         {
             currentState = AIState.Chasing;
+            AudioSource.PlayOneShot(Huh);
             lastKnownPlayerPosition = playerTransform.position;
         }
     }
@@ -87,6 +152,8 @@ public class AIAgent : MonoBehaviour
         if (Vector3.Distance(transform.position, playerTransform.position) < 1.5f)
         {
             player.Die();
+            anim.SetBool("Shoot", true);
+            currentState = AIState.Shoot;
         }
 
         lockOnTimer += Time.deltaTime;
@@ -98,6 +165,30 @@ public class AIAgent : MonoBehaviour
                 searchTimer = 0f;
             }
             lockOnTimer = 0f;
+        }
+    }
+
+    void LostPlayerUpdate()
+    {
+        _lostDelay += Time.deltaTime;
+        if (_lostDelay >= _lostDelayLength)
+        {
+            currentState = AIState.Patrolling;
+            _lureDelay = 0;
+        }
+    }
+
+    void LureUpdate()
+    {
+        if (Vector3.Distance(agent.destination, transform.position) < 2f)
+        {
+            _lureDelay += Time.deltaTime;
+            if (_lureDelay >= _lureIdleLength)
+            {
+                currentState = AIState.LostPlayer;
+                AudioSource.PlayOneShot(Huh);
+                _lureDelay = 0;
+            }
         }
     }
 

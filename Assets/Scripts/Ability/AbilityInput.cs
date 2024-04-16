@@ -11,6 +11,8 @@ public class AbilityState
 public class AbilityInput : MonoBehaviour
 {
     public bool CastMode { get; private set; }
+    public AudioSource CastSource;
+
     public string CurrentCast { get; private set; }
     public int MaxLength = 14;
 
@@ -20,7 +22,9 @@ public class AbilityInput : MonoBehaviour
     public UnityEvent<AbilityScriptableObject> OnSuccessfulCast;
     public UnityEvent OnFailedCast;
 
-    private void Awake()
+    private PlayerMovementController _movementController;
+
+    void Awake()
     {
         foreach (var ability in Abilities)
         {
@@ -30,6 +34,11 @@ public class AbilityInput : MonoBehaviour
                 Ability = ability
             });
         }
+    }
+
+    void Start()
+    {
+        _movementController = FindObjectOfType<PlayerMovementController>();
     }
 
     private void Update()
@@ -48,6 +57,12 @@ public class AbilityInput : MonoBehaviour
 
         CastMode = !CastMode;
         CurrentCast = "";
+
+        _movementController.DisableMovement = CastMode;
+        _movementController.SetDestination(_movementController.transform.position);
+
+        if (CastMode) CastSource.Play();
+        else CastSource.Stop();
     }
 
     private void ProcessCast()

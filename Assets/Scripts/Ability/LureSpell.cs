@@ -13,9 +13,9 @@ public class LureSpell : MonoBehaviour
 
         foreach (var guard in guards)
         {
-            guard.SetState(AIState.Searching);
-            guard.lastKnownPlayerPosition = hit.point;
+            guard.Lure(hit.point);
         }
 
+        Destroy(gameObject);
     }
 }

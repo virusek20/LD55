@@ -21,7 +21,7 @@ public class SpookSpell : MonoBehaviour
     {
         enemy.SetState(AIState.Spooked);
         yield return new WaitForSeconds(Duration);
-        enemy.SetState(AIState.Patrolling);
+        enemy.SetState(AIState.LostPlayer);
         Destroy(gameObject);
     }
 }
